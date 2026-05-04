@@ -20,6 +20,23 @@ spec:
         image: nginx
         ports:
         - containerPort: 80
+
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+
+        volumeMounts:
+        - name: app-storage
+          mountPath: /usr/share/nginx/html
+
+      volumes:
+      - name: app-storage
+        persistentVolumeClaim:
+          claimName: my-pvc
 ```
 ----------
 ## Pod (rare directly)
@@ -111,7 +128,7 @@ data:
 
 ## Secret
 
-```yam
+```yaml
 apiVersion: v1
 kind: Secret
 metadata:
