@@ -278,6 +278,11 @@ spec:
     - alert: PodCrashLoop
       expr: kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"} == 1
       for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Pod in CrashLoopBackOff"
+        description: "Pod {{ $labels.pod }}"
 ```
 
 ----------
